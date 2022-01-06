@@ -99,32 +99,32 @@ class _MainFormState extends State<MainForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("SMILE SNS"),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Padding(padding: EdgeInsets.all(30.0)),
-          Text(
-              _processingMessage,
-            style: TextStyle(
-              color: Colors.lightBlue,
-              fontSize: 32.0,
-            )
-          ),
-          TextFormField(
-            decoration: const InputDecoration(
-              icon: Icon(Icons.person),
-              hintText: "Please input your name.",
-              labelText: "YOUR NAME",
+        appBar: AppBar(
+          title: Text("SMILE SNS"),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Padding(padding: EdgeInsets.all(30.0)),
+            Text(
+                _processingMessage,
+                style: TextStyle(
+                  color: Colors.lightBlue,
+                  fontSize: 32.0,
+                )
             ),
-            onChanged:(text){
-              setState(() {_name = text;});
-            },
-          )
-        ],
-      ),
+            TextFormField(
+              decoration: const InputDecoration(
+                icon: Icon(Icons.person),
+                hintText: "Please input your name.",
+                labelText: "YOUR NAME",
+              ),
+              onChanged:(text){
+                setState(() {_name = text;});
+              },
+            )
+          ],
+        ),
         floatingActionButton: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
@@ -151,12 +151,12 @@ class TimelinePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("SMILE SNS"),
-      ),
-      body: Container(
-        child: _buildBody(context),
-      )
+        appBar: AppBar(
+          title: Text("SMILE SNS"),
+        ),
+        body: Container(
+          child: _buildBody(context),
+        )
     );
   }
 
@@ -165,7 +165,7 @@ class TimelinePage extends StatelessWidget {
       stream: FirebaseFirestore.instance.collection("smiles").orderBy("date", descending: true).limit(10).snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return LinearProgressIndicator();
-        return _buildList(context, snapshot.data.docs);
+        return _buildList(context, snapshot.data!.docs);
       },
     );
   }
@@ -201,8 +201,8 @@ class TimelinePage extends StatelessWidget {
               + "%の笑顔です。"
           ),
           trailing: Text(
-              _getIcon(_data["smile_prob"]),
-              style: TextStyle(fontSize: 24,),
+            _getIcon(_data["smile_prob"]),
+            style: TextStyle(fontSize: 24,),
           ),
           onTap: (){
             Navigator.push(
